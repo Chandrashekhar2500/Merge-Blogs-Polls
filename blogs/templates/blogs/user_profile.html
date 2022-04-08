@@ -1,0 +1,22 @@
+{% extends 'blogs/base.html' %}
+{% load static %}
+
+<!-- {% block title %}{{ user.username }}{% endblock %} -->
+
+{% block content %}
+        {% if user.is_authenticated %}
+        <h1> Profile: {{ user.username }}
+        <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'image/jerry.png' %}{% endif %}" width = "150" height = "150"  /></h1>
+        <h2>Name: {{ user.username }}</h2>
+        <h2>Mobile Number: {{ user.mobile_number }}</h2>
+        <h2>Mail Id: {{ user.mail }}</h2>
+        <h2>Company: {{ user.company }}</h2>
+        <h2>Designation: {{ user.designation }}</h2>
+        
+        <h2>State: {{ user.state }}</h2>
+        <h2>Country: {{ user.country }}</h2>
+        <h2>About: {{ user.about }}</h2> 
+        <button type="submit"> <a href="{% url 'blogs:user_update' %}">Update Profile</a> </button>
+        {% endif %}
+
+{% endblock %}

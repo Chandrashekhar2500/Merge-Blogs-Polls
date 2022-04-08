@@ -1,0 +1,26 @@
+{% extends 'blogs/base.html' %}
+{% load static %}
+
+    {% block content %}
+        <main class="container">
+            <div class="row">
+                <div class="col">
+                    {% for post in posts %}
+                        <article class="post">
+                            <time class="date">
+                                {{ post.published_date }}
+                            </time>
+                            category:<a href="{% url 'blogs:category_detail' post.category.slug %}">{{ post.category.name }}</a>
+
+                                <h2><img class ='img' src="{% if post.thumbnailImage %} {{post.thumbnailImage.url }}{% endif %}" style = "width:50px; height:50px">
+                                    <a href="{% url 'blogs:post_detail' post.slug %}">{{ post.title|truncatechars:30}}</a></h2>
+                                <p>{{ post.text|linebreaksbr|truncatechars:100}}</p>       
+                            tag: {% for i in post.tag.all %} <a href="{% url 'blogs:tag_detail' i.slug %}">{{ i.name | linebreaksbr }}</a> {% endfor %}
+
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    {% endblock %}
+
